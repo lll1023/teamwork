@@ -46,6 +46,9 @@ public class Fraction {//分数，分母只能为正数
         if (index2!=-1){//分子、分母
             destMolecular=Integer.parseInt(num.substring(index1,index2));
             destDenominator= Integer.parseInt(num.substring(index2+1));
+        }else {
+            destMolecular=Integer.parseInt(num);
+            destDenominator=1;
         }
         this.denominator=destDenominator;
         this.molecular=destMolecular+integer*destDenominator;
