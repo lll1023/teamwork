@@ -2,6 +2,9 @@ package com.teamwork.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.util.Objects;
+
 /**
  * @Author: Lsutin
  * @Date: 2021/10/20 8:51
@@ -154,5 +157,19 @@ public class Fraction {//分数，分母只能为正数
             builder.insert(0,'-');
         }
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fraction fraction = (Fraction) o;
+        return molecular == fraction.molecular &&
+                denominator == fraction.denominator;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(molecular, denominator);
     }
 }
