@@ -1,6 +1,5 @@
 package com.teamwork.model;
 
-import jdk.nashorn.internal.ir.Symbol;
 import lombok.Data;
 
 /**
@@ -17,13 +16,6 @@ public class BinaryTree {
     protected String symbol;
     // 符号集合
     public static final String Symbols[] = {"+", "-", "*", "÷"};
-
-//    public BinaryTree (Fraction value, BinaryTree left, BinaryTree right, String symbol) {
-//        this.value = value;
-//        this.left = left;
-//        this.right = right;
-//        this.symbol = symbol;
-//    }
 
     @Override
     public int hashCode() {

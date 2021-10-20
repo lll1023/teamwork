@@ -1,9 +1,5 @@
 package com.teamwork.model;
 
-import com.teamwork.model.Fraction;
-import org.springframework.util.StringUtils;
-
-import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -189,6 +185,7 @@ public class Expression {
                         System.out.println("表达式有误，请检查");
                     }
                 }
+                System.out.println(a);
                 stack.push(a.toString());
             }else {
                 stack.push(items[i]);
@@ -217,15 +214,6 @@ public class Expression {
 
         }
     }
-
-    public static void main(String[] args) {
-        Expression e = new Expression(10);
-//        System.out.println(e.expression);
-//        System.out.println(e.result);
-        System.out.println(e.expressionToPostfix("3 + 4/7  * ( 5 - 6 )"));
-        System.out.println(e.getPostfixResult("3 4/7 5 6 - * +"));
-    }
-
 
     @Override
     public int hashCode() {
