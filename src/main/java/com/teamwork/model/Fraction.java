@@ -167,8 +167,9 @@ public class Fraction {//分数，分母只能为正数
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Fraction fraction = (Fraction) o;
-        return molecular == fraction.molecular &&
-                denominator == fraction.denominator;
+        return (molecular == fraction.molecular &&
+                denominator == fraction.denominator) ||
+                ((double)molecular/denominator==(double)fraction.getMolecular()/fraction.getDenominator());
     }
 
     @Override

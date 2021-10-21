@@ -1,5 +1,7 @@
 package com.teamwork.model;
 
+import lombok.Data;
+
 import java.util.Stack;
 
 /**
@@ -7,14 +9,14 @@ import java.util.Stack;
  * @Date: 2021/10/20 15:22
  * @describe:
  */
-
+@Data
 public class Expression {
     public static final String Symbols[] = {"+", "-", "*", "÷"};
     public static final int MAX = 3;
 
     private BinaryTree root;
     private String expression;
-    private Fraction result;
+    private Fraction value;
 
     public Expression() {
         super();
@@ -64,7 +66,7 @@ public class Expression {
     /**
      * 计算函数
      */
-    public Fraction operate(Fraction left, Fraction right, String symbol) {
+    private Fraction operate(Fraction left, Fraction right, String symbol) {
         switch (symbol) {
             case "+": {
                 left.addition(right);
@@ -98,13 +100,13 @@ public class Expression {
         int symbolNum = (int) (Math.random() * MAX) + 1;
         root = generateBinaryTree(maxNum, symbolNum);
         expression = root.midTraverse() + "=";
-        result = getResult(root);
+        value = getResult(root);
     }
 
     /**
      * 根据中缀表达式生成后缀表达式
      */
-    public String expressionToPostfix(String expression) {
+    public static String expressionToPostfix(String expression) {
         Stack<String> stack = new Stack<>();
         StringBuilder queue = new StringBuilder();
         int index = 0;
@@ -156,8 +158,7 @@ public class Expression {
     /**
      * 由后缀表达式计算结果
      * */
-
-    public String getPostfixResult(String postfix) {
+    public static String getPostfixResult(String postfix) {
         String[] items = postfix.split(" ");
         Stack<String> stack = new Stack();
         for(int i=0;i<items.length;i++) {
@@ -167,18 +168,22 @@ public class Expression {
                 switch (items[i]) {
                     case "+" : {
                         a.addition(b);
+                        stack.push(a.toString());
                         break;
                     }
                     case "-" : {
-                        a.subtraction(b);
+                        b.subtraction(a);
+                        stack.push(b.toString());
                         break;
                     }
                     case "*" : {
                         a.multiplication(b);
+                        stack.push(a.toString());
                         break;
                     }
                     case "÷"  :{
-                        a.division(b);
+                        b.division(a);
+                        stack.push(b.toString());
                         break;
                     }
                     default: {
@@ -186,7 +191,6 @@ public class Expression {
                     }
                 }
                 System.out.println(a);
-                stack.push(a.toString());
             }else {
                 stack.push(items[i]);
             }
@@ -195,11 +199,11 @@ public class Expression {
     }
 
 
-    public boolean isOperator(String c) {
+    private static boolean isOperator(String c) {
         return c.equals("+") || c.equals("-") || c.equals("*") || c.equals("÷");
     }
 
-    public int priority(String symbol) {
+    private static int priority(String symbol) {
         switch (symbol) {
             case "*":
             case "÷":
@@ -217,6 +221,6 @@ public class Expression {
 
     @Override
     public int hashCode() {
-        return root.hashCode() + result.hashCode();
+        return root.hashCode() + value.hashCode();
     }
 }
