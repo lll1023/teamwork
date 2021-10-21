@@ -84,7 +84,7 @@ public class ExpressionController {
         }
         pass = new ArrayList<>();
         fail = new ArrayList<>();
-        for (int i=0;i<=expressions.size();i++){
+        for (int i=0;i<expressions.size();i++){
             String s = expressions.get(i);//四则运算表达式
             String postfix = Expression.expressionToPostfix(s.substring(0, s.indexOf("=")));//生成后缀表达式
             String postfixResult = Expression.getPostfixResult(postfix);//由后缀表达式生成结果
