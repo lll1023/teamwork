@@ -1,5 +1,7 @@
 package com.teamwork.model;
 
+import lombok.Data;
+
 import java.util.Stack;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Stack;
  * @Date: 2021/10/20 15:22
  * @describe:
  */
-
+@Data
 public class Expression {
     public static final String Symbols[] = {"+", "-", "*", "÷"};
     public static final int MAX = 3;
@@ -212,6 +214,12 @@ public class Expression {
             default:
                 return 0;
 
+        }
+    }
+
+    public static void main(String[] args) {
+        for(int i=0;i<100;i++) {
+            System.out.println(new Expression(10).getExpression());
         }
     }
 

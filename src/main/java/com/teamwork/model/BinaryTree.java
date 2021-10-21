@@ -117,7 +117,7 @@ public class BinaryTree {
             }
 
             if(isNeedBracket(symbol,node.right.symbol,false)) {
-                expression.append("( ").append(right + " ) ");
+                expression.append("( ").append(right + " )");
             }else {
                 expression.append(right);
             }
