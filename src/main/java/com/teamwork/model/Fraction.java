@@ -129,6 +129,10 @@ public class Fraction {//分数，分母只能为正数
     public void division(Fraction other){
         int destDenominator = denominator * other.getMolecular();
         int destMolecular = molecular * other.getDenominator();
+        if (destDenominator<0){
+            destDenominator=-destDenominator;
+            destMolecular=-destMolecular;
+        }
         //结果存放在原来的分数中
         molecular=destMolecular;
         denominator=destDenominator;
@@ -145,8 +149,8 @@ public class Fraction {//分数，分母只能为正数
         }
 
         //计算带分数
-        int integer = tempMolecular / denominator;//整数部分
-        if (integer>0){
+        int integer=integer=tempMolecular / denominator;//整数部分
+        if (integer>=0){
             builder.append(integer).append('’');
         }
         int destMolecular = tempMolecular % denominator;//真分数部分的分子
