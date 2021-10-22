@@ -104,6 +104,7 @@ public class Expression {
         value = new Fraction(getPostfixResult(s));
     }
 
+
     /**
      * 根据中缀表达式生成后缀表达式
      */
