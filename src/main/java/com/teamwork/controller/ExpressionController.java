@@ -85,15 +85,19 @@ public class ExpressionController {
         }
         pass = new ArrayList<>();
         fail = new ArrayList<>();
-        for (int i=0;i<expressions.size();i++){
-            String s = expressions.get(i);//四则运算表达式
-            String postfix = Expression.expressionToPostfix(s.substring(0, s.indexOf("=")));//生成后缀表达式
-            String postfixResult = Expression.getPostfixResult(postfix);//由后缀表达式生成结果
-            if (new Fraction(postfixResult).equals(new Fraction(result.get(i)))) {
-                pass.add(i+1);
-            }else {
-                fail.add(i+1);
+        try {
+            for (int i=0;i<expressions.size();i++){
+                String s = expressions.get(i);//四则运算表达式
+                String postfix = Expression.expressionToPostfix(s.substring(0, s.indexOf("=")));//生成后缀表达式
+                String postfixResult = Expression.getPostfixResult(postfix);//由后缀表达式生成结果
+                if (new Fraction(postfixResult).equals(new Fraction(result.get(i)))) {
+                    pass.add(i+1);
+                }else {
+                    fail.add(i+1);
+                }
             }
+        }catch (Exception e){
+            return ResultInfo.error("上传的文件内容格式错误");
         }
         String sPass = pass.toString();
         sPass=sPass.substring(1,sPass.length()-1);
