@@ -100,7 +100,8 @@ public class Expression {
         int symbolNum = (int) (Math.random() * MAX) + 1;
         root = generateBinaryTree(maxNum, symbolNum);
         expression = root.midTraverse() + "=";
-        value = getResult(root);
+        String s = expressionToPostfix(root.midTraverse());
+        value = new Fraction(getPostfixResult(s));
     }
 
     /**
@@ -216,12 +217,6 @@ public class Expression {
             default:
                 return 0;
 
-        }
-    }
-
-    public static void main(String[] args) {
-        for(int i=0;i<100;i++) {
-            System.out.println(new Expression(10).getExpression());
         }
     }
 
