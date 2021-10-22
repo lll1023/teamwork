@@ -71,7 +71,7 @@ down_answer_obj.addEventListener("click", function () {
     .then((res) => res.blob())
     .then((data) => {
       let blob = new Blob([data]);
-      let filename = "answers" + ".txt";
+      let filename = "answers.txt";
       let link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.download = filename;
@@ -116,11 +116,30 @@ check_btn.addEventListener('click',function() {
         alert("请上传文件！");
         return;
     }
+    check_btn.innerHTML = "检验中..."
     let data = new FormData();
     console.log(up_questions_file,up_answers_file)
-    data.set("files",up_questions_file,'questions.txt');
-    data.set("files",up_answers_file,'answers.txt');
-    postMethods('check',data).then(res => res.json()).then(data => {
-        console.log(data)
+    data.append("files",up_questions_file,'questions.txt');
+    data.append("files",up_answers_file,'answers.txt');
+    postMethods('check',data).then(res => {
+        if(res.status != 200) {
+            check_btn.innerHTML = "自动校验"
+            alert('请上传正确的文件');
+            return;
+        }
+        return res.blob();
+
+    }).then(data => {
+        if(data == null) {
+            return;
+        }
+        let blob = new Blob([data]);
+        let filename = "result.txt";
+        let link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+        window.URL.revokeObjectURL(link.href)
+        check_btn.innerHTML = "校验成功"
     })
 })
