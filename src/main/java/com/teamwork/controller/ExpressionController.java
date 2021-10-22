@@ -46,7 +46,7 @@ public class ExpressionController {
     }
 
     @PostMapping("/download")
-    public ResultInfo download(@RequestParam @NotNull(message = "文件名不能为空") String fileName,HttpServletResponse response){
+    public ResultInfo download(@RequestParam("fileName") @NotNull(message = "文件名不能为空") String fileName,HttpServletResponse response){
         try {
             if (!new File(fileName).exists()) {
                 return ResultInfo.error("文件："+fileName+" 不存在");
