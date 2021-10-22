@@ -24,6 +24,7 @@ import java.util.ArrayList;
  * @describe:
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/expressions")
 public class ExpressionController {
     @Value("${exercises.txt}")
